@@ -16,13 +16,16 @@ import { ConfigService } from '@nestjs/config';
         const databaseName = configService.get<string>('POSTGRE_TEST_DATABASE_NAME') || 'test';
 
         const isDevelopment = appEnv === 'dev';
+
         return {
           // dbms 유형
           type: 'postgres',
+          synchronize: isDevelopment,
           debug: false,
           logging: isDevelopment ? ['error', 'warn'] : ['info'],
           // TODO timezone (Asia/Seoul) 을 아래처럼 offset (+09:00) 으로 변경할 수 있는지 확인해보자.
           timezone: '+09:00',
+          entities: [__dirname + '/../**/*.entity{.ts,.js}'],
           host: databaseHost,
           port: Number.parseInt(databasePort, 10),
           username: databaseUser,

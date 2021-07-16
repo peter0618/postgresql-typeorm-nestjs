@@ -30,3 +30,6 @@ docker 폴더 안에 위 파일을 생성하고 아래 변수들을 설정합니
 
 ## 3. 기타
 pgadmin 을 설치하지 않고 datagrip 등의 다른 tool 을 이용한다면 docker-compose 파일에서 pgadmin 부분 및 network 설정 부분만 제거해서 사용해도 됩니다.
+```bash
+> docker-compose -f docker-compose-postgres.yml --env-file ./.env.postgres up -d
+```

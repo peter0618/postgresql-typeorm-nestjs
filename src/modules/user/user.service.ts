@@ -15,4 +15,13 @@ export class UserService {
   create(dto: CreateUserDto): Promise<User> {
     return this.usersRepository.save(dto);
   }
+
+  async findArticlesByUserId(id: number) {
+    return await this.usersRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.articles', 'articles')
+      .select(['user.firstName', 'articles'])
+      .where(`user.id = ${id}`)
+      .getMany();
+  }
 }

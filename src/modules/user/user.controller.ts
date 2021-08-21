@@ -1,4 +1,4 @@
-import { Body, Logger } from '@nestjs/common';
+import { Body, Logger, Param, ParseIntPipe } from '@nestjs/common';
 import { Controller, Get, Post } from '@nestjs/common';
 import { CreateUserDto } from './dto/create.user.dto';
 import { User } from './entities/user.entity';
@@ -20,5 +20,15 @@ export class UserController {
   async create(@Body() dto: CreateUserDto): Promise<User> {
     this.logger.debug(`create(dto: ${JSON.stringify(dto)})`);
     return this.userService.create(dto);
+  }
+
+  /**
+   * 특정 user 의 article 목록을 조회합니다.
+   * @param id
+   */
+  @Get('/:id/articles')
+  findArticles(@Param('id', ParseIntPipe) id: number) {
+    this.logger.debug(`findArticles(id: ${JSON.stringify(id)})`);
+    return this.userService.findArticlesByUserId(id);
   }
 }

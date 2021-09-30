@@ -22,7 +22,7 @@ import { ConfigService } from '@nestjs/config';
           type: 'postgres',
           synchronize: isDevelopment,
           debug: false,
-          logging: isDevelopment ? ['error', 'warn'] : ['info'],
+          logging: isDevelopment ? ['query', 'log', 'error', 'warn', 'info'] : ['info'],
           // TODO timezone (Asia/Seoul) 을 아래처럼 offset (+09:00) 으로 변경할 수 있는지 확인해보자.
           timezone: '+09:00',
           entities: [__dirname + '/../**/*.entity{.ts,.js}'],
